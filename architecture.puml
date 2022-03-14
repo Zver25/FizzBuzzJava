@@ -1,0 +1,40 @@
+@startuml
+interface Value {
+    +getValue()
+}
+
+class Number implements Value {
+    +getNumber()
+}
+
+class Tag implements Value
+
+interface Condition {
+    +boolean isTruthy(Number num)
+}
+
+class DivCondition implements Condition {
+    -int divider
+}
+
+abstract class Strategy implements Condition {
+    -Condition[] conditions
+    #getConditions()
+}
+
+class AndStrategy implements Strategy
+
+interface Rule {
+    +Value getValue()
+    +boolean isSuccess(Number num)
+}
+
+class TagNumRule implements Rule {
+    -Tag tag
+    -Condition condition
+}
+
+
+Tag *-- TagNumRule
+Condition *-- TagNumRule
+@enduml
